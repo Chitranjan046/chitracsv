@@ -1,0 +1,79 @@
+<head>
+<link rel="stylesheet" type="text/css" href="../css/home.css">
+<link rel="stylesheet" type="text/css" href="../css/header.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+</head>
+  
+
+
+<!-- header -->
+<div class="navbar">
+    <div class="welcome">
+       <h1><b>चित्रा छोटू की फूआ हैं </b></h1>
+    </div>   
+</div>
+
+<!-- upload -->
+<div class="container">
+    <!-- main text -->
+    <div class="center-text">
+        <h1>चित्रा फुआ कृपया फ़ाइल अपलोड करें</h1>
+    </div>
+
+    <!-- upload box -->
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <div class="upload-container">
+            <input type="file" id="csvFile" name="file" accept=".csv">
+            <button class="upload-btn">Upload</button>
+        </div>
+    </form>
+</div>
+
+<!-- show uploaded files -->
+<div class="files-list" style="margin-bottom: 50px;">
+    <div class="l-c-t">
+        <h2>Uploaded files</h2>
+    </div>
+
+    <% if(files.length==0) { %>
+        <div class="no-file"><h2>No files to show!</h2></div>
+        <% } else { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Time (UTC)</th>
+                        <th>View</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let file of files) { %>
+                        <tr>
+                            <td>
+                                <%= file.fileName %>
+                            </td>
+                            <td>
+                                <%= file.createdAt.toLocaleDateString() %>
+                            </td>
+                            <td>
+                                <%= file.createdAt.toLocaleTimeString() %>
+                            </td>
+                            <td>
+                                <a href="/view/<%= file.file %>" class="view-link">
+                                  <i class="fas fa-arrow-up-right-from-square" style="color: green;"></i>
+                                </a>
+                              </td>
+                              <td>
+                                <a href="/delete/<%= file.file %>" class="delete-link">
+                                  <i class="far fa-trash-can" style="color: red;"></i>
+                                </a>
+                              </td>
+                              
+                        </tr>
+                        <% } %>
+                </tbody>
+            </table>
+            <% } %>
+</div>

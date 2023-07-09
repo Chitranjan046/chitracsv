@@ -1,0 +1,62 @@
+<!-- Import local CSS files for styling -->
+<link rel="stylesheet" type="text/css" href="../css/file_viewer.css">
+<link rel="stylesheet" type="text/css" href="../css/header.css">
+
+<!-- Header section -->
+<div class="nav-bar" style="position: fixed; box-shadow: 0 8px 6px -6px black; background-color: #bfeb24;">
+    <!-- Back button -->
+    <a href="/" class="back-icon">
+        <i class="fa-solid fa-circle-arrow-left" style="color: #f42d2d;"></i>
+    </a>
+    <!-- Title -->
+    <div class="title"style="color: red">
+         File
+    </div>
+    <!-- File name -->
+    <div class="file-name"style="color:white">
+        <%= fileName %>
+    </div>
+</div>
+
+<!-- Search bar -->
+<div class="search-bar">
+    <form id="searchForm">
+        <!-- Search input box and button -->
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="Search data...">
+            <button id="search" class="search-btn" type="button">Search</button>
+        </div>
+    </form>
+    <!-- Total rows count -->
+    <div>
+        <p id="total-rows">Total Rows: <%= length %></p>
+    </div>
+</div>
+
+<!-- Search results table -->
+<div>
+    <table>
+        <thead>
+            <!-- Table header -->
+            <tr>
+                <% for (let i of head) { %>
+                    <th>
+                        <%= i %>
+                    </th>
+                <% } %>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Table rows -->
+            <% for (let row of data) { %>
+                <tr>
+                    <% for (let key of Object.keys(row)) { %>
+                        <td>
+                            <%= row[key] %>
+                        </td>
+                    <% } %>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
